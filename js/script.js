@@ -2,7 +2,7 @@ console.log("cobrinha");
 let canvas=document.getElementById("snake");
 let context=canvas.getContext("2d");
 let box=32;
-let snake =[];
+var snake =[];
 snake[0]={
     x:0*box,
     y:0*box
@@ -18,7 +18,18 @@ function criarCobrinha(){
         context.fillRect(snake[i].x, snake[i].y,box,box);
     }
 }
+document.addEventListener('keydown',update);
+function update(event){
+    if(event.key ==37 && direction !="right") direction="left";
+    if(event.key ==38 && direction !="down") direction="up";
+    if(event.key ==39 && direction !="left") direction="right";
+    if(event.key ==40 && direction !="up") direction="down";
+}
 function iniciarJogo(){
+    if (snake[0].x>15*box&& direction=="right") snake[0].x=0;
+    if (snake[0].x<0*box&& direction=="left") snake[0].x=16*box;
+    if (snake[0].y>15*box&& direction=="down") snake[1].y=0;
+    if (snake[0].y<0*box&& direction=="up") snake[0].y=0;
     criarBG();
     criarCobrinha();
     let snakex=snake[0].x;
@@ -32,7 +43,7 @@ function iniciarJogo(){
         x:snakex,
         y:snakey
     }
-    snake.unshift(newhead)
+    snake.unshift(newHead);
 }
 
 let jogo =setInterval(iniciarJogo, 100);
