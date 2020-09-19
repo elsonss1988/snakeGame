@@ -38,8 +38,8 @@ function drawFood(){
 function iniciarJogo(){
     if (snake[0].x>15*box&& direction=="right") snake[0].x=0;
     if (snake[0].x<0*box&& direction=="left") snake[0].x=16*box;
-    if (snake[0].y>15*box&& direction=="down") snake[1].y=0;
-    if (snake[0].y<0*box&& direction=="up") snake[0].y=0;
+    if (snake[0].y>15*box&& direction=="down") snake[0].y=0;
+    if (snake[0].y<0*box&& direction=="up") snake[0].y=16*box;
     criarBG();
     criarCobrinha();
     drawFood();
@@ -48,8 +48,15 @@ function iniciarJogo(){
     if(direction=="right") snakex+= box;
     if(direction=="left") snakex-=box;
     if(direction=="up") snakey-=box;
-    if(direction=="down") snakey+=box
-    snake.pop();
+    if(direction=="down") snakey+=box;
+    
+    if(snakex !=food.x || snakey !=food.y){
+        snake.pop();
+    }else{food.x=Math.floor(Math.random()*15+1)*box;
+        food.y=Math.floor(Math.random()*15+1)*box;
+    }
+
+    //snake.pop();
     let newHead={
         x:snakex,
         y:snakey
